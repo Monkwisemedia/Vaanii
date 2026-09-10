@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# keep the env template, ignore real env files
+!.env.example
+
+# local-only Claude Code settings
+.claude/settings.local.json
