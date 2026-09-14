@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { LoginForm } from "@/components/LoginForm";
 
 export const metadata: Metadata = {
   title: "Log in",
   robots: { index: false },
 };
 
-export default function LoginPage() {
+export default async function LoginPage({ searchParams }: PageProps<"/login">) {
+  const params = await searchParams;
+  const next = typeof params.next === "string" ? params.next : undefined;
+  const checkEmail = params.checkEmail === "1";
+
   return (
     <div className="auth">
       <div className="auth__card">
@@ -17,30 +22,13 @@ export default function LoginPage() {
         <h1>Log in</h1>
         <p className="auth__sub">Welcome back. Pick up where your chats left off.</p>
 
-        <div className="auth__note">
-          Accounts open shortly. We&rsquo;re finishing the secure sign-in and billing setup — the
-          marketing site and pricing are live now.
-        </div>
+        {checkEmail && (
+          <div className="auth__note">
+            Account created — check your email to confirm it, then log in below.
+          </div>
+        )}
 
-        <form>
-          <div className="field">
-            <label htmlFor="email">Work email</label>
-            <input id="email" name="email" type="email" autoComplete="email" disabled />
-          </div>
-          <div className="field">
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="current-password"
-              disabled
-            />
-          </div>
-          <button className="btn btn--block btn--lg" type="submit" disabled>
-            Log in
-          </button>
-        </form>
+        <LoginForm next={next} />
 
         <p className="auth__meta">
           New here? <Link href="/signup">Create an account</Link>
