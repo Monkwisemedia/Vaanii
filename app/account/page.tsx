@@ -6,6 +6,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { logout } from "@/app/actions/auth";
 import { SITE, TIERS } from "@/lib/site";
 import { Checkout } from "@/components/Checkout";
+import { BrandMark } from "@/components/BrandMark";
 
 export const metadata: Metadata = {
   title: "Your account",
@@ -53,10 +54,7 @@ export default async function AccountPage() {
   return (
     <div className="auth" style={{ alignItems: "flex-start", paddingTop: "6rem" }}>
       <div className="auth__card" style={{ maxWidth: 520 }}>
-        <Link href="/" className="brand">
-          <span className="brand__dot" aria-hidden="true" />
-          Vaanii
-        </Link>
+        <BrandMark />
         <h1>Welcome, {businessName}</h1>
         <p className="auth__sub">{user.email}</p>
 

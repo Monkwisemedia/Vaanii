@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LoginForm } from "@/components/LoginForm";
+import { BrandMark } from "@/components/BrandMark";
 
 export const metadata: Metadata = {
   title: "Log in",
@@ -15,10 +16,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   return (
     <div className="auth">
       <div className="auth__card">
-        <Link href="/" className="brand">
-          <span className="brand__dot" aria-hidden="true" />
-          Vaanii
-        </Link>
+        <BrandMark />
         <h1>Log in</h1>
         <p className="auth__sub">Welcome back. Pick up where your chats left off.</p>
 

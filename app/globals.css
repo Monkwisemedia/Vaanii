@@ -139,23 +139,18 @@ p { margin: 0; }
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   font-family: var(--font-display, var(--font-fallback-display));
   font-weight: 800;
   font-size: 1.28rem;
   letter-spacing: -0.03em;
+  color: var(--ink);
 }
-.brand__dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--wa-green);
-  box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.18);
-  animation: pulse 2.4s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.18); }
-  50%      { box-shadow: 0 0 0 7px rgba(37, 211, 102, 0); }
+.brand__mark {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex: none;
 }
 .nav__links {
   display: flex;

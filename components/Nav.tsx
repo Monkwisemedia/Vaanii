@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { NAV_LINKS } from "@/lib/site";
+import { BrandMark } from "@/components/BrandMark";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -17,10 +18,7 @@ export function Nav() {
   return (
     <nav className="nav" data-scrolled={scrolled}>
       <div className="wrap nav__inner">
-        <Link href="/" className="brand">
-          <span className="brand__dot" aria-hidden="true" />
-          Vaanii
-        </Link>
+        <BrandMark />
         <div className="nav__links">
           {NAV_LINKS.map((l) => (
             <a key={l.href} href={l.href}>

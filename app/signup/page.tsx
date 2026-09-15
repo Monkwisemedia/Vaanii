@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { TIERS, formatINR, type BillingInterval } from "@/lib/site";
 import { SignupForm } from "@/components/SignupForm";
+import { BrandMark } from "@/components/BrandMark";
 
 export const metadata: Metadata = {
   title: "Choose plan",
@@ -25,10 +26,7 @@ export default async function SignupPage({ searchParams }: PageProps<"/signup">)
   return (
     <div className="auth">
       <div className="auth__card">
-        <Link href="/" className="brand">
-          <span className="brand__dot" aria-hidden="true" />
-          Vaanii
-        </Link>
+        <BrandMark />
         <h1>Create your account</h1>
         <p className="auth__sub">
           {tier.name} plan — {formatINR(tier.price[intervalParam])} /{" "}

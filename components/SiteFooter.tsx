@@ -1,14 +1,12 @@
 import Link from "next/link";
+import { BrandMark } from "@/components/BrandMark";
 
 export function SiteFooter() {
   return (
     <footer className="footer">
       <div className="wrap">
         <div className="footer__grid">
-          <Link href="/" className="brand">
-            <span className="brand__dot" aria-hidden="true" />
-            Vaanii
-          </Link>
+          <BrandMark />
           <nav className="footer__links" aria-label="Footer">
             <a href="/#how">How it works</a>
             <a href="/#features">Features</a>
