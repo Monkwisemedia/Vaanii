@@ -21,6 +21,9 @@ export function SiteFooter() {
           with, endorsed by, or sponsored by WhatsApp LLC or Meta Platforms, Inc. &ldquo;WhatsApp&rdquo;
           is a trademark of its respective owner.
           <br />
+          Vaanii — the platform, technology and all associated rights and copyright — is owned by
+          Monk Wise Media.
+          <br />
           &copy; {new Date().getFullYear()} Vaanii — all rights reserved.
         </p>
       </div>

@@ -12,7 +12,7 @@ const FEATURES = [
     cls: "f--wide f--feat",
     icon: <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />,
     title: "Instant replies, 24/7",
-    body: "Median first response under 3 seconds — at midnight, on Holi, during your team’s lunch break. Nobody waits.",
+    body: "Vaanii first response under 3 seconds — at midnight, on Holi, during your team’s lunch break. Nobody waits.",
   },
   {
     cls: "f--reg",
@@ -60,17 +60,6 @@ const FEATURES = [
     body: "Your rules: high value, angry tone, or “talk to someone” — it steps aside and briefs the human.",
   },
   {
-    cls: "f--wide",
-    icon: (
-      <>
-        <circle cx="12" cy="12" r="10" />
-        <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" />
-      </>
-    ),
-    title: "Hindi, English, Hinglish — and 6 regional languages",
-    body: "Replies in the language the customer wrote in. Tamil, Telugu, Marathi, Bengali, Kannada and Gujarati on Growth and above.",
-  },
-  {
     cls: "f--reg",
     icon: (
       <>
@@ -89,8 +78,8 @@ const FEATURES = [
         <path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5M3 12c0 1.7 4 3 9 3s9-1.3 9-3" />
       </>
     ),
-    title: "Syncs to your CRM or Sheet",
-    body: "Every contact, tag and outcome lands in HubSpot, Zoho, or a plain Google Sheet automatically.",
+    title: "Everything, on the Vaanii platform",
+    body: "Every contact, chat, tag and outcome lives in your Vaanii dashboard — full history, charts and requirements, all in one place.",
   },
   {
     cls: "f--reg",
@@ -141,7 +130,7 @@ const CASES = [
 const FAQ = [
   {
     q: "Does it use my own WhatsApp number?",
-    a: "Yes. Vaanii runs on your existing business number through the official WhatsApp Business Platform (Cloud API). Your customers see your brand and your name — never ours.",
+    a: "Yes. Vaanii runs on your existing business number. Your customers see your brand and your name — never ours.",
   },
   {
     q: "Do my customers need to install anything?",
@@ -149,15 +138,11 @@ const FAQ = [
   },
   {
     q: "Which languages does it handle?",
-    a: "English, Hindi and Hinglish on every plan. Tamil, Telugu, Marathi, Bengali, Kannada and Gujarati on Growth and above. It replies in whatever language the customer wrote in.",
+    a: "Hindi and English, on every plan.",
   },
   {
     q: "How long until it’s live?",
     a: "Usually within a day once your number is verified with Meta. We help you through the setup and review your first replies before switching it on.",
-  },
-  {
-    q: "What happens to my data?",
-    a: "Conversations are encrypted in transit and stored on servers in India. You can export or delete your data at any time. We are built to be DPDP-compliant.",
   },
   {
     q: "When does a human take over?",
@@ -215,7 +200,7 @@ export default function Home() {
               Handling WhatsApp conversations for 200+ Indian businesses.
             </p>
             <StatCounter value={3} suffix="s" caption="median first reply" />
-            <StatCounter value={68} suffix="%" caption="chats resolved with no human" />
+            <StatCounter value={90} suffix="%" caption="chats resolved with no human" />
             <StatCounter value={24} suffix="/7" caption="nights, Sundays, festivals" />
           </Reveal>
         </section>
@@ -279,8 +264,7 @@ export default function Home() {
               <span className="step__n" />
               <h3>Connect your number</h3>
               <p>
-                Link your existing WhatsApp business number through the official Cloud API. Keep your
-                chat history.
+                Link your existing WhatsApp business number through Vaanii. Keep your chat history.
               </p>
             </div>
             <div className="step">
