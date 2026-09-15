@@ -5,7 +5,7 @@ import { TIERS, formatINR, type BillingInterval } from "@/lib/site";
 import { SignupForm } from "@/components/SignupForm";
 
 export const metadata: Metadata = {
-  title: "Start free",
+  title: "Choose plan",
   robots: { index: false },
 };
 

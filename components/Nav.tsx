@@ -33,7 +33,7 @@ export function Nav() {
             Log in
           </Link>
           <Link className="btn" href="/#pricing">
-            Start free{" "}
+            Choose plan{" "}
             <span className="btn__arrow" aria-hidden="true">
               &rarr;
             </span>

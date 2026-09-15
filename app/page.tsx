@@ -189,7 +189,7 @@ export default function Home() {
               </p>
               <div className="hero__actions">
                 <a className="btn btn--lg" href="#pricing">
-                  Start free{" "}
+                  Choose plan{" "}
                   <span className="btn__arrow" aria-hidden="true">
                     &rarr;
                   </span>
@@ -350,7 +350,9 @@ export default function Home() {
               about 60% of missed enquiries and 22% of those convert.
             </p>
           </Reveal>
-          <RoiCalculator />
+          <Reveal>
+            <RoiCalculator />
+          </Reveal>
         </section>
 
         {/* PRICING */}
@@ -360,10 +362,6 @@ export default function Home() {
             <h2>Simple pricing. No lock-in.</h2>
           </Reveal>
           <Pricing />
-          <div className="agency">
-            <span>Reselling this to your own clients under your brand?</span>
-            <Link href="/signup?plan=scale">Ask about white-label &rarr;</Link>
-          </div>
           <p className="pricing__foot">
             WhatsApp charges Meta a fee per 24-hour conversation window. We pass those through at cost
             and show them in your dashboard.
@@ -456,7 +454,7 @@ export default function Home() {
           <div className="compose">
             <span className="compose__ghost">Type a message&hellip;</span>
             <a className="btn btn--lg" href="#pricing">
-              Start free{" "}
+              Choose plan{" "}
               <span className="btn__arrow" aria-hidden="true">
                 &rarr;
               </span>

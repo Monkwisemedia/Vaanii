@@ -2,47 +2,52 @@
 
 /* ============================================================
    Vaanii — WhatsApp AI Agent
-   Committed single visual world: "a conversation that runs all night".
-   Deep aubergine ground, violet structure, one cyan for action,
-   WhatsApp green quarantined inside the phone mockup only.
+   Clean white surface, violet/cyan as a restrained accent pair.
+   WhatsApp green stays quarantined inside the phone mockup, which
+   keeps its own dark WhatsApp-at-night chrome regardless of page theme.
    Fonts (--font-display / --font-body / --font-mono) are provided by
    next/font in app/layout.tsx.
    ============================================================ */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --ground:        #0e0b16;
-  --ground-2:      #130f1f;
-  --surface:       #191430;
-  --surface-2:     #211a3c;
-  --hairline:      rgba(167, 139, 250, 0.14);
-  --hairline-2:    rgba(167, 139, 250, 0.30);
+  --ground:        #ffffff;
+  --ground-2:      #f7f6fb;
+  --surface:       #ffffff;
+  --surface-2:     #f5f3fa;
+  --hairline:      rgba(20, 16, 40, 0.10);
+  --hairline-2:    rgba(20, 16, 40, 0.18);
 
-  --ink:           #f3f0fb;
-  --ink-mid:       #b7b0d2;
-  --ink-dim:       #7d7699;
+  --ink:           #150f24;
+  --ink-mid:       #57516c;
+  --ink-dim:       #8a84a0;
 
-  --violet:        #8b5cf6;
-  --violet-bright: #b39dfb;
-  --violet-deep:   #5b2fce;
+  /* Deep, readable-on-white variant — the default for text/icons/links. */
+  --violet:        #6d28d9;
+  --violet-bright: #7c3aed;
+  --violet-deep:   #4c1d95;
 
-  --cyan:          #24d3ea;
-  --cyan-deep:     #0b3b44;
+  /* Vivid variant — only for solid fills (buttons, badges, decorative). */
+  --violet-fill:   #8b5cf6;
+
+  --cyan:          #0e7490;
+  --cyan-deep:     #083344;
+  --cyan-bright:   #22d3ee;
 
   --wa-green:      #25d366;
   --wa-out-deep:   #0c5f43;
   --wa-in:         #262338;
 
-  --ok:            #4ade80;
-  --danger:        #f97066;
+  --ok:            #16a34a;
+  --danger:        #dc2626;
 
   --wrap:          1140px;
   --rail:          clamp(14px, 4.5vw, 46px);
   --pad-beat:      clamp(38px, 9vw, 100px);
 
-  --shadow-lg:     0 34px 80px -30px rgba(0, 0, 0, 0.75);
-  --shadow-md:     0 18px 44px -22px rgba(0, 0, 0, 0.6);
+  --shadow-lg:     0 34px 70px -30px rgba(20, 16, 40, 0.22);
+  --shadow-md:     0 16px 36px -20px rgba(20, 16, 40, 0.18);
 
   --tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M9.55 17.05 4.5 12l1.4-1.4 3.65 3.6L18.1 5.3l1.4 1.4z'/%3E%3C/svg%3E");
   --font-fallback-display: "Trebuchet MS", system-ui, sans-serif;
@@ -67,10 +72,6 @@ body {
   line-height: 1.65;
   letter-spacing: 0.002em;
   overflow-x: hidden;
-  background-image:
-    radial-gradient(60rem 40rem at 82% -8%, rgba(139, 92, 246, 0.18), transparent 60%),
-    radial-gradient(46rem 34rem at -6% 22%, rgba(36, 211, 234, 0.08), transparent 55%);
-  background-attachment: fixed;
   min-height: 100dvh;
 }
 
@@ -123,7 +124,7 @@ p { margin: 0; }
   border-bottom: 1px solid transparent;
 }
 .nav[data-scrolled="true"] {
-  background: rgba(14, 11, 22, 0.72);
+  background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(14px) saturate(1.4);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
   border-bottom-color: var(--hairline);
@@ -167,7 +168,7 @@ p { margin: 0; }
 .nav__cta { display: flex; align-items: center; gap: 0.9rem; }
 
 .btn {
-  --btn-bg: var(--cyan);
+  --btn-bg: var(--cyan-bright);
   --btn-fg: #04262c;
   display: inline-flex;
   align-items: center;
@@ -192,7 +193,7 @@ p { margin: 0; }
   --btn-fg: var(--ink);
   border-color: var(--hairline-2);
 }
-.btn--ghost:hover { background: var(--surface); box-shadow: none; border-color: var(--violet); }
+.btn--ghost:hover { background: var(--surface-2); box-shadow: none; border-color: var(--violet); }
 .btn--lg { font-size: 1.02rem; padding: 0.9em 1.6em; }
 .btn--block { width: 100%; justify-content: center; }
 .btn__arrow { transition: transform 0.2s ease; }
@@ -296,7 +297,7 @@ p { margin: 0; }
 }
 .hero h1 { margin-bottom: 1.3rem; }
 .hero h1 .accent {
-  background: linear-gradient(100deg, var(--violet-bright), var(--cyan));
+  background: linear-gradient(100deg, var(--violet), var(--cyan-bright));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -377,7 +378,7 @@ p { margin: 0; }
   height: 38px;
   border-radius: 50%;
   flex: none;
-  background: linear-gradient(140deg, var(--violet), var(--cyan));
+  background: linear-gradient(140deg, var(--violet-fill), var(--cyan-bright));
   display: grid;
   place-items: center;
   font-family: var(--font-display, var(--font-fallback-display));
@@ -434,7 +435,7 @@ p { margin: 0; }
 }
 .msg--in .msg__meta { color: rgba(233, 237, 239, 0.45); }
 .msg__meta .ticks { color: #86a8b8; margin-left: 3px; transition: color 0.4s ease; }
-.msg--read .msg__meta .ticks { color: var(--cyan); }
+.msg--read .msg__meta .ticks { color: var(--cyan-bright); }
 
 .typing {
   align-self: flex-start;
@@ -749,7 +750,7 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--cyan);
+  background: var(--cyan-bright);
   border: 3px solid var(--ground);
   box-shadow: 0 0 0 1px var(--hairline-2);
 }
@@ -757,7 +758,7 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--cyan);
+  background: var(--cyan-bright);
   border: 3px solid var(--ground);
   box-shadow: 0 0 0 1px var(--hairline-2);
 }
@@ -775,7 +776,7 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   font-size: clamp(2.4rem, 6vw, 3.5rem);
   letter-spacing: -0.03em;
   color: transparent;
-  background: linear-gradient(100deg, var(--violet-bright), var(--cyan));
+  background: linear-gradient(100deg, var(--violet), var(--cyan-bright));
   -webkit-background-clip: text;
   background-clip: text;
   font-variant-numeric: tabular-nums;
@@ -831,8 +832,8 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   border-radius: 18px 18px 18px 5px;
 }
 .tier--feat {
-  border-color: var(--cyan);
-  background: linear-gradient(180deg, rgba(36, 211, 234, 0.08), var(--surface));
+  border-color: var(--cyan-bright);
+  background: linear-gradient(180deg, rgba(34, 211, 238, 0.1), var(--surface));
 }
 .tier__badge {
   align-self: flex-start;
@@ -841,7 +842,7 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--cyan-deep);
-  background: var(--cyan);
+  background: var(--cyan-bright);
   padding: 0.3em 0.7em;
   border-radius: 6px;
   margin-bottom: 1rem;
@@ -888,7 +889,7 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   mask: var(--tick) center / contain no-repeat;
 }
 .tier .btn { margin-top: auto; justify-content: center; }
-.tier--feat .btn { --btn-bg: var(--cyan); }
+.tier--feat .btn { --btn-bg: var(--cyan-bright); }
 .tier:not(.tier--feat) .btn {
   --btn-bg: transparent;
   --btn-fg: var(--ink);
@@ -896,23 +897,6 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
 }
 .tier:not(.tier--feat) .btn:hover { background: var(--surface-2); box-shadow: none; }
 
-.agency {
-  margin-top: 1.4rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.6rem 1rem;
-  padding: 1.1rem 1.4rem;
-  border: 1px dashed var(--hairline-2);
-  border-radius: 12px;
-  font-size: 0.95rem;
-  color: var(--ink-mid);
-}
-.agency a {
-  color: var(--cyan);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
 .pricing__foot { margin-top: 1rem; font-size: 0.8rem; color: var(--ink-dim); }
 
 /* ============================================================
@@ -955,7 +939,7 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   color: #fff;
   background: linear-gradient(140deg, var(--violet), var(--violet-deep));
 }
-.quote__av--b { background: linear-gradient(140deg, var(--cyan), #0a7d8c); }
+.quote__av--b { background: linear-gradient(140deg, var(--cyan-bright), #0a7d8c); }
 .quote__av--c { background: linear-gradient(140deg, #f0883e, #b8531c); }
 .quote b { color: var(--ink-mid); font-weight: 500; }
 
@@ -1115,9 +1099,9 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   margin-bottom: 1rem;
 }
 .auth__error {
-  background: rgba(249, 112, 102, 0.12);
-  border: 1px solid rgba(249, 112, 102, 0.4);
-  color: #ffd9d5;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  color: #991b1b;
   font-size: 0.88rem;
   padding: 0.7rem 0.9rem;
   border-radius: 10px;

@@ -19,7 +19,7 @@ export function RoiCalculator() {
   }, [enquiries, aov, missed]);
 
   return (
-    <div className="roi" data-reveal>
+    <div className="roi">
       <div className="roi__controls">
         <div className="ctrl">
           <label htmlFor="roi-enq">

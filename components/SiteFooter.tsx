@@ -15,7 +15,7 @@ export function SiteFooter() {
             <a href="/#pricing">Pricing</a>
             <a href="/#faq">FAQ</a>
             <Link href="/login">Log in</Link>
-            <a href="/#pricing">Start free</a>
+            <a href="/#pricing">Choose plan</a>
           </nav>
         </div>
         <p className="footer__fine">

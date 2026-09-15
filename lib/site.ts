@@ -50,7 +50,7 @@ export const TIERS: Tier[] = [
       "Hindi + English",
       "Email support",
     ],
-    cta: "Start free",
+    cta: "Choose plan",
   },
   {
     id: "growth",
@@ -68,7 +68,7 @@ export const TIERS: Tier[] = [
       "CRM / Google Sheet sync",
       "Priority support",
     ],
-    cta: "Start free",
+    cta: "Choose plan",
   },
   {
     id: "scale",
