@@ -31,7 +31,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
         <LoginForm next={next} />
 
         <p className="auth__meta">
-          New here? <Link href="/signup">Create an account</Link>
+          New here? <Link href="/#pricing">Choose a plan</Link>
         </p>
       </div>
     </div>

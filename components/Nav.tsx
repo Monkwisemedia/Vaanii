@@ -32,7 +32,7 @@ export function Nav() {
           <Link className="btn btn--ghost" href="/login">
             Log in
           </Link>
-          <Link className="btn" href="/signup">
+          <Link className="btn" href="/#pricing">
             Start free{" "}
             <span className="btn__arrow" aria-hidden="true">
               &rarr;

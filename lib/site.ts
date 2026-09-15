@@ -8,9 +8,9 @@ export const SITE = {
   name: "Vaanii",
   domain: "vaanii.in",
   url: "https://vaanii.in",
-  // The developer's portal — where a logged-in, paid-up user is handed off to.
-  // Set NEXT_PUBLIC_PORTAL_URL in the environment. Falls back to /account locally.
-  portalUrl: process.env.NEXT_PUBLIC_PORTAL_URL || "",
+  // Where a paid-up, logged-in customer is sent to use the actual product.
+  // Override with NEXT_PUBLIC_PORTAL_URL in the environment if it ever moves.
+  portalUrl: process.env.NEXT_PUBLIC_PORTAL_URL || "https://portal.vaanii.in",
 };
 
 export const NAV_LINKS = [

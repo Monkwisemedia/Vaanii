@@ -188,12 +188,12 @@ export default function Home() {
                 and English, while your team sleeps.
               </p>
               <div className="hero__actions">
-                <Link className="btn btn--lg" href="/signup">
+                <a className="btn btn--lg" href="#pricing">
                   Start free{" "}
                   <span className="btn__arrow" aria-hidden="true">
                     &rarr;
                   </span>
-                </Link>
+                </a>
                 <a className="btn btn--ghost btn--lg" href="#how">
                   See how it works
                 </a>
@@ -455,12 +455,12 @@ export default function Home() {
           </p>
           <div className="compose">
             <span className="compose__ghost">Type a message&hellip;</span>
-            <Link className="btn btn--lg" href="/signup">
+            <a className="btn btn--lg" href="#pricing">
               Start free{" "}
               <span className="btn__arrow" aria-hidden="true">
                 &rarr;
               </span>
-            </Link>
+            </a>
           </div>
           <p className="final__micro">Setup in a day · Cancel anytime · No card to start</p>
         </section>
