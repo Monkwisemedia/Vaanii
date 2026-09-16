@@ -19,35 +19,42 @@ export function Pricing() {
 
   return (
     <>
-      <div className="channel-toggle" role="group" aria-label="Choose a channel">
-        {CHANNELS.map((c) => (
-          <button
-            key={c.id}
-            type="button"
-            data-active={channel === c.id}
-            onClick={() => setChannel(c.id)}
-          >
-            {c.label}
-            {c.badge && <span className="save">{c.badge}</span>}
-          </button>
-        ))}
-      </div>
+      <div className="pricing-controls">
+        <div className="channel-toggle" role="group" aria-label="Choose a channel">
+          {CHANNELS.map((c) => (
+            <button
+              key={c.id}
+              type="button"
+              data-active={channel === c.id}
+              onClick={() => setChannel(c.id)}
+            >
+              {c.label}
+              {c.badge && <span className="save">{c.badge}</span>}
+            </button>
+          ))}
+        </div>
 
-      <div className="billing-toggle" role="group" aria-label="Billing interval">
-        <button
-          type="button"
-          data-active={interval === "monthly"}
-          onClick={() => setInterval("monthly")}
-        >
-          Monthly
-        </button>
-        <button
-          type="button"
-          data-active={interval === "yearly"}
-          onClick={() => setInterval("yearly")}
-        >
-          Yearly <span className="save">2 months free</span>
-        </button>
+        <fieldset className="billing-toggle">
+          <legend className="sr-only">Billing interval</legend>
+          <label data-active={interval === "monthly"}>
+            <input
+              type="radio"
+              name="billing-interval"
+              checked={interval === "monthly"}
+              onChange={() => setInterval("monthly")}
+            />
+            Monthly
+          </label>
+          <label data-active={interval === "yearly"}>
+            <input
+              type="radio"
+              name="billing-interval"
+              checked={interval === "yearly"}
+              onChange={() => setInterval("yearly")}
+            />
+            Yearly <span className="save">2 months free</span>
+          </label>
+        </fieldset>
       </div>
 
       <Reveal className="tiers" group key={channel}>
