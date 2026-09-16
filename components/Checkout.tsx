@@ -3,7 +3,7 @@
 import Script from "next/script";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { formatINR, type BillingInterval, type Tier } from "@/lib/site";
+import { formatINR, type BillingInterval, type Channel, type Tier } from "@/lib/site";
 
 declare global {
   interface Window {
@@ -12,11 +12,13 @@ declare global {
 }
 
 export function Checkout({
+  channel,
   tier,
   interval,
   email,
   name,
 }: {
+  channel: Channel;
   tier: Tier;
   interval: BillingInterval;
   email?: string;
@@ -36,7 +38,7 @@ export function Checkout({
       const res = await fetch("/api/razorpay/create-subscription", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan: tier.id, interval }),
+        body: JSON.stringify({ channel, plan: tier.id, interval }),
       });
       const data = await res.json();
 

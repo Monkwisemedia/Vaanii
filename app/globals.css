@@ -782,11 +782,13 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
 /* ============================================================
    PRICING
    ============================================================ */
+.channel-toggle,
 .billing-toggle {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   margin-top: 1.6rem;
+  margin-right: 0.7rem;
   padding: 0.35rem;
   border: 1px solid var(--hairline);
   border-radius: 999px;
@@ -796,6 +798,7 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
+.channel-toggle button,
 .billing-toggle button {
   border: 0;
   background: transparent;
@@ -806,11 +809,20 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   font: inherit;
   transition: background 0.18s ease, color 0.18s ease;
 }
+.channel-toggle button[data-active="true"],
 .billing-toggle button[data-active="true"] {
   background: var(--violet);
   color: #fff;
 }
-.billing-toggle .save { color: var(--cyan); margin-left: 0.35rem; }
+.channel-toggle .save,
+.billing-toggle .save {
+  color: var(--cyan);
+  margin-left: 0.35rem;
+}
+.channel-toggle button[data-active="true"] .save,
+.billing-toggle button[data-active="true"] .save {
+  color: #d7fff9;
+}
 
 .tiers {
   display: grid;
@@ -883,6 +895,16 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   -webkit-mask: var(--tick) center / contain no-repeat;
   mask: var(--tick) center / contain no-repeat;
 }
+.tier li.tier__plus {
+  display: block;
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  padding-top: 0.3rem;
+  border-top: 1px solid var(--hairline);
+}
+.tier li.tier__plus::before { content: none; }
 .tier .btn { margin-top: auto; justify-content: center; }
 .tier--feat .btn { --btn-bg: var(--cyan-bright); }
 .tier:not(.tier--feat) .btn {

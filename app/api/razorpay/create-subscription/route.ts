@@ -7,7 +7,7 @@ import {
   isRazorpayConfigured,
   totalCountFor,
 } from "@/lib/razorpay";
-import { TIERS, type BillingInterval } from "@/lib/site";
+import { PLANS, CHANNELS, type BillingInterval, type Channel } from "@/lib/site";
 
 export async function POST(request: Request) {
   if (!isRazorpayConfigured()) {
@@ -27,18 +27,22 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json().catch(() => ({}));
+  const channelId = String(body.channel || user.user_metadata?.channel || "whatsapp");
+  const channel: Channel = CHANNELS.some((c) => c.id === channelId)
+    ? (channelId as Channel)
+    : "whatsapp";
   const tierId = String(body.plan || user.user_metadata?.plan || "");
   const interval: BillingInterval = body.interval === "yearly" ? "yearly" : "monthly";
-  const tier = TIERS.find((t) => t.id === tierId);
+  const tier = PLANS[channel].find((t) => t.id === tierId);
 
   if (!tier) {
     return NextResponse.json({ error: "Pick a plan first." }, { status: 400 });
   }
 
-  const planId = getRazorpayPlanId(tier.id, interval);
+  const planId = getRazorpayPlanId(channel, tier.id, interval);
   if (!planId) {
     return NextResponse.json(
-      { error: `No Razorpay plan is configured yet for ${tier.name} (${interval}).` },
+      { error: `No Razorpay plan is configured yet for ${tier.name} (${channel}, ${interval}).` },
       { status: 503 }
     );
   }
@@ -52,6 +56,7 @@ export async function POST(request: Request) {
       notes: {
         user_id: user.id,
         email: user.email || "",
+        channel,
         tier: tier.id,
         interval,
       },
@@ -60,12 +65,13 @@ export async function POST(request: Request) {
     // Record the attempt as "pending" so /account can show something
     // sensible even before the webhook confirms payment. Written with the
     // service-role client on purpose — regular users have no write access
-    // to this table (see supabase/migrations/0001_init.sql); the webhook is
-    // the only thing allowed to ever mark a row "active".
+    // to this table (see supabase/migrations); the webhook is the only
+    // thing allowed to ever mark a row "active".
     const admin = createAdminClient();
     await admin.from("subscriptions").upsert(
       {
         user_id: user.id,
+        channel,
         tier: tier.id,
         interval,
         status: "pending",

@@ -1,6 +1,6 @@
 import "server-only";
 import Razorpay from "razorpay";
-import type { Tier, BillingInterval } from "@/lib/site";
+import type { Channel, TierId, BillingInterval } from "@/lib/site";
 
 export function isRazorpayConfigured(): boolean {
   return Boolean(
@@ -24,29 +24,21 @@ export function getRazorpay(): Razorpay {
 }
 
 /**
- * Maps a (tier, interval) pair to the Razorpay Plan ID created in the
- * dashboard (Subscriptions → Plans). Keep these env vars in sync with the
- * prices in lib/site.ts — Razorpay is the actual source of truth for what
- * gets charged.
+ * Maps a (channel, tier, interval) triple to the Razorpay Plan ID created
+ * in the dashboard (Subscriptions → Plans). Keep these env vars in sync
+ * with the prices in lib/site.ts — Razorpay is the actual source of truth
+ * for what gets charged. Naming: RAZORPAY_PLAN_<CHANNEL>_<TIER>_<INTERVAL>.
  */
-const PLAN_ENV_KEYS: Record<Tier["id"], Record<BillingInterval, string>> = {
-  starter: {
-    monthly: "RAZORPAY_PLAN_STARTER_MONTHLY",
-    yearly: "RAZORPAY_PLAN_STARTER_YEARLY",
-  },
-  growth: {
-    monthly: "RAZORPAY_PLAN_GROWTH_MONTHLY",
-    yearly: "RAZORPAY_PLAN_GROWTH_YEARLY",
-  },
-  scale: {
-    monthly: "RAZORPAY_PLAN_SCALE_MONTHLY",
-    yearly: "RAZORPAY_PLAN_SCALE_YEARLY",
-  },
-};
+function envKeyFor(channel: Channel, tier: TierId, interval: BillingInterval): string {
+  return `RAZORPAY_PLAN_${channel.toUpperCase()}_${tier.toUpperCase()}_${interval.toUpperCase()}`;
+}
 
-export function getRazorpayPlanId(tier: Tier["id"], interval: BillingInterval): string | null {
-  const envKey = PLAN_ENV_KEYS[tier][interval];
-  return process.env[envKey] || null;
+export function getRazorpayPlanId(
+  channel: Channel,
+  tier: TierId,
+  interval: BillingInterval
+): string | null {
+  return process.env[envKeyFor(channel, tier, interval)] || null;
 }
 
 /** 10 years of billing cycles — Razorpay requires a total_count, this is "effectively forever". */

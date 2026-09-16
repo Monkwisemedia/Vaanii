@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { logout } from "@/app/actions/auth";
-import { SITE, TIERS } from "@/lib/site";
+import { SITE, PLANS, CHANNELS, type Channel } from "@/lib/site";
 import { Checkout } from "@/components/Checkout";
 import { BrandMark } from "@/components/BrandMark";
 
@@ -32,9 +32,13 @@ export default async function AccountPage() {
   const businessName =
     (user.user_metadata?.business_name as string | undefined) || "your business";
 
+  // `channel` may not exist yet if supabase/migrations/0002_add_channel.sql
+  // hasn't been run — selecting it then just fails this query gracefully
+  // (data comes back null) and we fall through to the metadata-based
+  // fallback below instead of crashing the page.
   const { data: subscription } = await supabase
     .from("subscriptions")
-    .select("tier, interval, status")
+    .select("channel, tier, interval, status")
     .eq("user_id", user.id)
     .order("created_at", { ascending: false })
     .limit(1)
@@ -44,12 +48,17 @@ export default async function AccountPage() {
 
   // Fall back to whatever plan they picked at signup if there's no
   // subscription row yet (e.g. they haven't reached checkout).
+  const pendingChannelId = subscription?.channel || (user.user_metadata?.channel as string | undefined);
+  const pendingChannel: Channel = CHANNELS.some((c) => c.id === pendingChannelId)
+    ? (pendingChannelId as Channel)
+    : "whatsapp";
   const pendingTierId = subscription?.tier || (user.user_metadata?.plan as string | undefined);
   const pendingInterval =
     (subscription?.interval as "monthly" | "yearly" | undefined) ||
     (user.user_metadata?.interval as "monthly" | "yearly" | undefined) ||
     "monthly";
-  const pendingTier = TIERS.find((t) => t.id === pendingTierId);
+  const pendingTier = PLANS[pendingChannel].find((t) => t.id === pendingTierId);
+  const channelLabel = CHANNELS.find((c) => c.id === pendingChannel)?.label;
 
   return (
     <div className="auth" style={{ alignItems: "flex-start", paddingTop: "6rem" }}>
@@ -61,9 +70,9 @@ export default async function AccountPage() {
         {isActive ? (
           <>
             <div className="auth__note">
-              {pendingTier?.name} plan active
-              {subscription?.interval ? ` · billed ${subscription.interval}` : ""}. Your WhatsApp AI
-              product is ready.
+              {channelLabel} · {pendingTier?.name} plan active
+              {subscription?.interval ? ` · billed ${subscription.interval}` : ""}. Your Vaanii
+              AI agent is ready.
             </div>
             <a className="btn btn--block btn--lg" href={SITE.portalUrl}>
               Open your dashboard &rarr;
@@ -72,10 +81,11 @@ export default async function AccountPage() {
         ) : pendingTier ? (
           <>
             <div className="auth__note">
-              One step left — pay for the {pendingTier.name} plan and your WhatsApp AI product
-              unlocks immediately.
+              One step left — pay for the {channelLabel} {pendingTier.name} plan and your Vaanii
+              AI agent unlocks immediately.
             </div>
             <Checkout
+              channel={pendingChannel}
               tier={pendingTier}
               interval={pendingInterval}
               email={user.email}

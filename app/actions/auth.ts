@@ -18,6 +18,7 @@ export async function signup(
   const business = String(formData.get("business") || "").trim();
   const email = String(formData.get("email") || "").trim();
   const password = String(formData.get("password") || "");
+  const channel = String(formData.get("channel") || "whatsapp");
   const plan = String(formData.get("plan") || "");
   const interval = String(formData.get("interval") || "monthly");
 
@@ -29,7 +30,7 @@ export async function signup(
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
-    options: { data: { business_name: business, plan, interval } },
+    options: { data: { business_name: business, channel, plan, interval } },
   });
 
   if (error) {

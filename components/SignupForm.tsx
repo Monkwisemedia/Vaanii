@@ -4,9 +4,11 @@ import { useActionState } from "react";
 import { signup, type AuthState } from "@/app/actions/auth";
 
 export function SignupForm({
+  channel,
   plan,
   interval,
 }: {
+  channel: string;
   plan?: string;
   interval: "monthly" | "yearly";
 }) {
@@ -17,6 +19,7 @@ export function SignupForm({
 
   return (
     <form action={formAction}>
+      <input type="hidden" name="channel" value={channel} />
       {plan && <input type="hidden" name="plan" value={plan} />}
       <input type="hidden" name="interval" value={interval} />
 

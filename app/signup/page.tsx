@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { TIERS, formatINR, type BillingInterval } from "@/lib/site";
+import { PLANS, CHANNELS, formatINR, type BillingInterval, type Channel } from "@/lib/site";
 import { SignupForm } from "@/components/SignupForm";
 import { BrandMark } from "@/components/BrandMark";
 
@@ -13,8 +13,12 @@ export const metadata: Metadata = {
 export default async function SignupPage({ searchParams }: PageProps<"/signup">) {
   const params = await searchParams;
   const planParam = typeof params.plan === "string" ? params.plan : undefined;
+  const channelParam: Channel = CHANNELS.some((c) => c.id === params.channel)
+    ? (params.channel as Channel)
+    : "whatsapp";
   const intervalParam: BillingInterval = params.interval === "yearly" ? "yearly" : "monthly";
-  const tier = TIERS.find((t) => t.id === planParam);
+  const tier = PLANS[channelParam].find((t) => t.id === planParam);
+  const channelLabel = CHANNELS.find((c) => c.id === channelParam)?.label;
 
   // A plan is chosen first, on the pricing section — signing up without one
   // isn't a supported path, so send visitors there instead of showing a
@@ -29,12 +33,12 @@ export default async function SignupPage({ searchParams }: PageProps<"/signup">)
         <BrandMark />
         <h1>Create your account</h1>
         <p className="auth__sub">
-          {tier.name} plan — {formatINR(tier.price[intervalParam])} /{" "}
+          {channelLabel} · {tier.name} plan — {formatINR(tier.price[intervalParam])} /{" "}
           {intervalParam === "monthly" ? "month" : "year"}. You&rsquo;ll pay after this step,
           and can change plans any time.
         </p>
 
-        <SignupForm plan={tier.id} interval={intervalParam} />
+        <SignupForm channel={channelParam} plan={tier.id} interval={intervalParam} />
 
         <p className="auth__meta">
           Already have an account? <Link href="/login">Log in</Link>
