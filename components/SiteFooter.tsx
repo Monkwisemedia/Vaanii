@@ -16,6 +16,11 @@ export function SiteFooter() {
             <a href="/#pricing">Choose plan</a>
           </nav>
         </div>
+        <nav className="footer__links footer__links--legal" aria-label="Legal">
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/terms">Terms of Service</Link>
+          <Link href="/refund-policy">Refund &amp; Cancellation</Link>
+        </nav>
         <p className="footer__fine">
           Vaanii is an independent product built on the WhatsApp Business Platform and the
           Instagram Graph API. Not affiliated with, endorsed by, or sponsored by WhatsApp LLC,

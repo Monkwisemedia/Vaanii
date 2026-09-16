@@ -1162,6 +1162,48 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
 }
 
 /* ============================================================
+   LEGAL PAGES
+   ============================================================ */
+.legal {
+  padding-block: clamp(48px, 8vw, 88px) clamp(64px, 10vw, 110px);
+  max-width: 780px;
+}
+.legal__updated {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 0.9rem;
+}
+.legal h1 {
+  font-size: clamp(2rem, 4.4vw, 2.7rem);
+  margin-bottom: 2.4rem;
+}
+.legal__body h2 {
+  font-size: 1.3rem;
+  letter-spacing: -0.015em;
+  margin-top: 2.6rem;
+  margin-bottom: 0.9rem;
+}
+.legal__body h2:first-child { margin-top: 0; }
+.legal__body p {
+  color: var(--ink-mid);
+  margin-bottom: 1rem;
+}
+.legal__body ul {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+  color: var(--ink-mid);
+}
+.legal__body li { margin-bottom: 0.5rem; }
+.legal__body a {
+  color: var(--violet);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.legal__body strong { color: var(--ink); }
+
+/* ============================================================
    FOOTER
    ============================================================ */
 .footer {
@@ -1183,6 +1225,12 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   color: var(--ink-dim);
 }
 .footer__links a:hover { color: var(--ink); }
+.footer__links--legal {
+  margin-top: 1.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--hairline);
+  font-size: 0.82rem;
+}
 .footer__fine {
   margin-top: 2rem;
   padding-top: 1.6rem;
