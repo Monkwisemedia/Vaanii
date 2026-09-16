@@ -6,8 +6,9 @@ export async function proxy(request: NextRequest) {
   return await updateSession(request);
 }
 
+// Only /account actually needs the session-refresh + gate check — running
+// it on every marketing page too (the previous matcher) added a Supabase
+// network round-trip to every single navigation on the site.
 export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-  ],
+  matcher: ["/account/:path*"],
 };

@@ -1,9 +1,8 @@
 "use client";
 
 import Script from "next/script";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { formatINR, type BillingInterval, type Channel, type Tier } from "@/lib/site";
+import { useEffect, useRef, useState } from "react";
+import { SITE, formatINR, type BillingInterval, type Channel, type Tier } from "@/lib/site";
 
 declare global {
   interface Window {
@@ -24,11 +23,12 @@ export function Checkout({
   email?: string;
   name?: string;
 }) {
-  const router = useRouter();
   const [state, setState] = useState<"idle" | "starting" | "paying" | "confirming" | "error">(
     "idle"
   );
   const [error, setError] = useState("");
+  const [scriptReady, setScriptReady] = useState(false);
+  const autoStarted = useRef(false);
 
   const pay = async () => {
     setState("starting");
@@ -65,8 +65,10 @@ export function Checkout({
         handler: () => {
           setState("confirming");
           // The webhook usually lands within a second or two; give it a
-          // moment, then re-fetch this page from the server.
-          setTimeout(() => router.refresh(), 1800);
+          // moment, then send them straight into the portal.
+          setTimeout(() => {
+            window.location.href = SITE.portalUrl;
+          }, 1200);
         },
         modal: {
           ondismiss: () => setState("idle"),
@@ -79,15 +81,30 @@ export function Checkout({
     }
   };
 
+  // Jump straight into Razorpay the moment the page is ready, instead of
+  // making them click a "Pay" button first. If they dismiss the modal, the
+  // button below stays as a manual retry — this effect only fires once.
+  useEffect(() => {
+    if (scriptReady && !autoStarted.current) {
+      autoStarted.current = true;
+      pay();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scriptReady]);
+
   return (
     <div>
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
+      <Script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        strategy="afterInteractive"
+        onReady={() => setScriptReady(true)}
+      />
 
       {error && <p className="auth__error">{error}</p>}
 
       {state === "confirming" ? (
         <p style={{ color: "var(--ink-mid)", fontSize: ".92rem" }}>
-          Payment received — activating your account&hellip;
+          Payment received — taking you to your dashboard&hellip;
         </p>
       ) : (
         <button
@@ -96,8 +113,8 @@ export function Checkout({
           onClick={pay}
           disabled={state === "starting" || state === "paying"}
         >
-          {state === "starting"
-            ? "Starting checkout…"
+          {state === "starting" || state === "paying"
+            ? "Opening checkout…"
             : `Pay ${formatINR(tier.price[interval])} / ${interval === "monthly" ? "month" : "year"}`}
         </button>
       )}

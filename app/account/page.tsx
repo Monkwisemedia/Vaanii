@@ -46,6 +46,12 @@ export default async function AccountPage() {
 
   const isActive = subscription?.status === "active";
 
+  // Already paying — skip the account screen entirely and go straight to
+  // the portal, every time they log in from here on.
+  if (isActive) {
+    redirect(SITE.portalUrl);
+  }
+
   // Fall back to whatever plan they picked at signup if there's no
   // subscription row yet (e.g. they haven't reached checkout).
   const pendingChannelId = subscription?.channel || (user.user_metadata?.channel as string | undefined);
@@ -67,18 +73,7 @@ export default async function AccountPage() {
         <h1>Welcome, {businessName}</h1>
         <p className="auth__sub">{user.email}</p>
 
-        {isActive ? (
-          <>
-            <div className="auth__note">
-              {channelLabel} · {pendingTier?.name} plan active
-              {subscription?.interval ? ` · billed ${subscription.interval}` : ""}. Your Vaanii
-              AI agent is ready.
-            </div>
-            <a className="btn btn--block btn--lg" href={SITE.portalUrl}>
-              Open your dashboard &rarr;
-            </a>
-          </>
-        ) : pendingTier ? (
+        {pendingTier ? (
           <>
             <div className="auth__note">
               One step left — pay for the {channelLabel} {pendingTier.name} plan and your Vaanii
