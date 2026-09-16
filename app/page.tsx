@@ -5,7 +5,56 @@ import { ChatDemo } from "@/components/ChatDemo";
 import { StatCounter } from "@/components/StatCounter";
 import { RoiCalculator } from "@/components/RoiCalculator";
 import { Pricing } from "@/components/Pricing";
+import { DemoRequestForm } from "@/components/DemoRequestForm";
 import { SiteFooter } from "@/components/SiteFooter";
+
+const INTEGRATIONS = [
+  {
+    icon: (
+      <>
+        <ellipse cx="12" cy="5" rx="9" ry="3" />
+        <path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5M3 12c0 1.7 4 3 9 3s9-1.3 9-3" />
+      </>
+    ),
+    title: "CRM systems",
+    body: "Push qualified leads and full conversation history into your sales pipeline.",
+    tag: "Included",
+  },
+  {
+    icon: (
+      <>
+        <circle cx="9" cy="21" r="1" />
+        <circle cx="20" cy="21" r="1" />
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+      </>
+    ),
+    title: "E-commerce stores",
+    body: "Sync inventory, prices and orders with the store you already run.",
+    tag: "Included",
+  },
+  {
+    icon: (
+      <>
+        <rect x="1" y="4" width="22" height="16" rx="2" />
+        <path d="M1 10h22" />
+      </>
+    ),
+    title: "Payment flows",
+    body: "Guide customers from chat straight to a UPI or Razorpay checkout.",
+    tag: "Included",
+  },
+  {
+    icon: (
+      <>
+        <path d="M12 2 2 7l10 5 10-5-10-5z" />
+        <path d="m2 17 10 5 10-5M2 12l10 5 10-5" />
+      </>
+    ),
+    title: "Enterprise APIs",
+    body: "Custom CRM, ERP or internal systems connected on demand.",
+    tag: "On Scale",
+  },
+];
 
 const FEATURES = [
   {
@@ -46,7 +95,7 @@ const FEATURES = [
       </>
     ),
     title: "Catalogue & payment links",
-    body: "Shares product cards, prices and a UPI or Razorpay link right in the thread — the sale closes without leaving WhatsApp.",
+    body: "Shares product cards, prices and a UPI or Razorpay link right in the thread — the sale closes without leaving the chat.",
   },
   {
     cls: "f--reg",
@@ -68,7 +117,7 @@ const FEATURES = [
       </>
     ),
     title: "Broadcasts & follow-ups",
-    body: "Nudges the ones who went quiet, announces a drop or an offer — within WhatsApp policy.",
+    body: "Nudges the ones who went quiet, announces a drop or an offer — within WhatsApp & Instagram policy.",
   },
   {
     cls: "f--reg",
@@ -129,12 +178,12 @@ const CASES = [
 
 const FAQ = [
   {
-    q: "Does it use my own WhatsApp number?",
-    a: "Yes. Vaanii runs on your existing business number. Your customers see your brand and your name — never ours.",
+    q: "Does it use my own WhatsApp number or Instagram account?",
+    a: "Yes. Vaanii runs on your existing WhatsApp number and/or Instagram account. Your customers see your brand and your name — never ours.",
   },
   {
     q: "Do my customers need to install anything?",
-    a: "No. It’s the same WhatsApp they already have on their phone. Nothing to download, no new app, no link to click.",
+    a: "No. It’s the same WhatsApp or Instagram they already have on their phone. Nothing to download, no new app, no link to click.",
   },
   {
     q: "Which languages does it handle?",
@@ -169,8 +218,8 @@ export default function Home() {
                 Every customer replied to in <span className="accent">3 seconds</span>. Even at 2 AM.
               </h1>
               <p className="hero__sub">
-                Vaanii reads, answers, qualifies and books — on your own WhatsApp number, in Hindi
-                and English, while your team sleeps.
+                Vaanii reads, answers, qualifies and books — on your own WhatsApp number or
+                Instagram account, in Hindi and English, while your team sleeps.
               </p>
               <div className="hero__actions">
                 <a className="btn btn--lg" href="#pricing">
@@ -185,7 +234,7 @@ export default function Home() {
               </div>
               <p className="hero__micro">
                 <span>No app for your customers</span>
-                <span>Works on your existing number</span>
+                <span>Works on your existing number or account</span>
                 <span>Live in a day</span>
               </p>
             </div>
@@ -197,7 +246,7 @@ export default function Home() {
         <section className="proof">
           <Reveal as="div" className="wrap proof__inner">
             <p className="proof__label">
-              Handling WhatsApp conversations for 200+ Indian businesses.
+              Handling WhatsApp &amp; Instagram conversations for 200+ Indian businesses.
             </p>
             <StatCounter value={3} suffix="s" caption="median first reply" />
             <StatCounter value={90} suffix="%" caption="chats resolved with no human" />
@@ -226,7 +275,8 @@ export default function Home() {
             </li>
             <li>
               <span>
-                <b>4 in 10</b> WhatsApp enquiries to small businesses never get a reply at all.
+                <b>4 in 10</b> WhatsApp and Instagram enquiries to small businesses never get a
+                reply at all.
               </span>
             </li>
             <li>
@@ -255,8 +305,8 @@ export default function Home() {
           </Reveal>
           <Reveal>
             <p className="beat__lead">
-              Vaanii connects to the WhatsApp Business Platform and answers from your number — your
-              name, your tone, your catalogue.
+              Vaanii connects to WhatsApp and Instagram and answers from your own number or
+              account — your name, your tone, your catalogue.
             </p>
           </Reveal>
           <Reveal as="div" className="steps" group>
@@ -264,7 +314,8 @@ export default function Home() {
               <span className="step__n" />
               <h3>Connect your number</h3>
               <p>
-                Link your existing WhatsApp business number through Vaanii. Keep your chat history.
+                Link your WhatsApp number, Instagram account, or both, through Vaanii. Keep your
+                chat history.
               </p>
             </div>
             <div className="step">
@@ -309,7 +360,7 @@ export default function Home() {
         <section className="wrap beat" id="cases">
           <span className="beat__time">13:00 &nbsp;·&nbsp; between customers</span>
           <Reveal>
-            <h2>Built for the businesses that live on WhatsApp.</h2>
+            <h2>Built for the businesses that live on WhatsApp &amp; Instagram.</h2>
           </Reveal>
           <Reveal as="div" className="cases" group>
             {CASES.map((c) => (
@@ -339,17 +390,69 @@ export default function Home() {
           </Reveal>
         </section>
 
+        {/* DEMO REQUEST */}
+        <section className="wrap beat" id="demo">
+          <span className="beat__time">20:05 &nbsp;·&nbsp; one message away</span>
+          <Reveal>
+            <h2>See Vaanii on your own WhatsApp or Instagram.</h2>
+          </Reveal>
+          <Reveal>
+            <p className="beat__lead">
+              Tell us about your business and we&rsquo;ll set up a live, working demo on your own
+              number — not a generic pitch, an AI agent trained on your actual catalogue and prices.
+            </p>
+          </Reveal>
+          <Reveal>
+            <DemoRequestForm />
+          </Reveal>
+        </section>
+
         {/* PRICING */}
         <section className="wrap beat" id="pricing">
           <span className="beat__time">21:00 &nbsp;·&nbsp; still open for business</span>
           <Reveal>
             <h2>Simple pricing. No lock-in.</h2>
           </Reveal>
+          <Reveal>
+            <span className="trust-badge">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2 4 5v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V5l-8-3z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+              Built on the <b>official WhatsApp Business Platform</b> &amp;{" "}
+              <b>Instagram Graph API</b> — fully compliant, no ban risk.
+            </span>
+          </Reveal>
           <Pricing />
           <p className="pricing__foot">
-            WhatsApp charges Meta a fee per 24-hour conversation window. We pass those through at cost
-            and show them in your dashboard.
+            WhatsApp charges Meta a fee per 24-hour conversation window (Instagram doesn&rsquo;t). We
+            pass those through at cost and show them in your dashboard.
           </p>
+        </section>
+
+        {/* INTEGRATIONS */}
+        <section className="wrap beat" id="integrations">
+          <span className="beat__time">21:20 &nbsp;·&nbsp; closing out the register</span>
+          <Reveal>
+            <h2>Connects to the tools you already use.</h2>
+          </Reveal>
+          <Reveal>
+            <p className="beat__lead">
+              CRM, e-commerce, payments — and enterprise integrations on demand with Scale.
+            </p>
+          </Reveal>
+          <Reveal as="div" className="integrations" group>
+            {INTEGRATIONS.map((i) => (
+              <div key={i.title} className={`integration${i.tag === "On Scale" ? " integration--soon" : ""}`}>
+                <div className="integration__ic" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">{i.icon}</svg>
+                </div>
+                <h3>{i.title}</h3>
+                <p>{i.body}</p>
+                <span className="integration__tag">{i.tag}</span>
+              </div>
+            ))}
+          </Reveal>
         </section>
 
         {/* TESTIMONIALS */}
@@ -433,7 +536,8 @@ export default function Home() {
           </span>
           <h2>Start a conversation that sells itself.</h2>
           <p className="final__sub">
-            Connect your number tonight. Wake up to answered chats and booked slots.
+            Connect tonight — WhatsApp, Instagram, or both. Wake up to answered chats and booked
+            slots.
           </p>
           <div className="compose">
             <span className="compose__ghost">Type a message&hellip;</span>

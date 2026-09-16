@@ -17,9 +17,10 @@ export function SiteFooter() {
           </nav>
         </div>
         <p className="footer__fine">
-          Vaanii is an independent product built on the WhatsApp Business Platform. Not affiliated
-          with, endorsed by, or sponsored by WhatsApp LLC or Meta Platforms, Inc. &ldquo;WhatsApp&rdquo;
-          is a trademark of its respective owner.
+          Vaanii is an independent product built on the WhatsApp Business Platform and the
+          Instagram Graph API. Not affiliated with, endorsed by, or sponsored by WhatsApp LLC,
+          Instagram, or Meta Platforms, Inc. &ldquo;WhatsApp&rdquo; and &ldquo;Instagram&rdquo; are
+          trademarks of their respective owners.
           <br />
           Vaanii — the platform, technology and all associated rights and copyright — is owned by
           Monk Wise Media.

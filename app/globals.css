@@ -702,6 +702,49 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
 .case p { font-size: 0.92rem; color: var(--ink-mid); }
 
 /* ============================================================
+   INTEGRATIONS
+   ============================================================ */
+.integrations {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 2.4rem;
+}
+.integration {
+  padding: 1.4rem;
+  border: 1px solid var(--hairline);
+  border-radius: 14px 14px 14px 5px;
+  background: var(--surface);
+}
+.integration--soon { border-style: dashed; }
+.integration__ic {
+  width: 26px;
+  height: 26px;
+  margin-bottom: 0.9rem;
+  color: var(--violet-bright);
+}
+.integration__ic svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.integration h3 { font-size: 1rem; margin-bottom: 0.35rem; }
+.integration p { font-size: 0.88rem; color: var(--ink-mid); }
+.integration__tag {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-family: var(--font-mono, var(--font-fallback-mono));
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+/* ============================================================
    ROI CALCULATOR
    ============================================================ */
 .roi {
@@ -780,8 +823,85 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
 .roi__note { font-size: 0.82rem; color: var(--ink-dim); min-height: 1.2rem; }
 
 /* ============================================================
+   DEMO REQUEST
+   ============================================================ */
+.demo-card {
+  margin-top: 2.4rem;
+  padding: clamp(1.6rem, 4vw, 2.6rem);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 22px 22px 22px 6px;
+}
+.demo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1.2rem;
+}
+.demo-grid .field--wide { grid-column: 1 / -1; }
+.chip-group {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.chip-group legend {
+  width: 100%;
+  font-size: 0.8rem;
+  color: var(--ink-mid);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.chip {
+  border: 1px solid var(--hairline-2);
+  background: var(--ground-2);
+  color: var(--ink-mid);
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.chip[data-active="true"] {
+  background: var(--violet);
+  border-color: var(--violet);
+  color: #fff;
+}
+.demo-card .btn { margin-top: 0.4rem; }
+.demo__success {
+  color: var(--ink);
+  font-size: 0.98rem;
+  padding: 0.5rem 0;
+}
+.demo__success b { color: var(--ok); }
+
+/* ============================================================
    PRICING
    ============================================================ */
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5em 0.9em 0.5em 0.7em;
+  border: 1px solid var(--hairline-2);
+  border-radius: 999px;
+  background: var(--ground-2);
+  font-size: 0.82rem;
+  color: var(--ink-mid);
+  margin-bottom: 0.4rem;
+}
+.trust-badge svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  fill: none;
+  stroke: var(--ok);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.trust-badge b { color: var(--ink); font-weight: 600; }
+
 .channel-toggle,
 .billing-toggle {
   display: inline-flex;
@@ -1144,10 +1264,13 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
   .roi { grid-template-columns: 1fr; }
   .bento { grid-template-columns: repeat(2, 1fr); }
   .f--wide, .f--reg, .f--tall { grid-column: span 1; }
+  .integrations { grid-template-columns: repeat(2, 1fr); }
+  .demo-grid { grid-template-columns: 1fr; }
   .nav__links { display: none; }
 }
 @media (max-width: 560px) {
   .bento { grid-template-columns: 1fr; }
+  .integrations { grid-template-columns: 1fr; }
   .proof__inner { grid-template-columns: 1fr; }
   .phone__caption {
     position: static;

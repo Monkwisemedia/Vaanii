@@ -26,15 +26,15 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://vaanii.in"),
   title: {
-    default: "Vaanii — WhatsApp AI Agent that answers and closes sales",
+    default: "Vaanii — WhatsApp & Instagram AI Agent that closes sales",
     template: "%s · Vaanii",
   },
   description:
-    "Vaanii reads, answers, qualifies and books on your own WhatsApp number — in Hindi and English, around the clock — so no customer waits and no enquiry is lost.",
+    "Vaanii reads, answers, qualifies and books on your own WhatsApp number and Instagram account — in Hindi and English, around the clock — so no customer waits and no enquiry is lost.",
   openGraph: {
-    title: "Vaanii — WhatsApp AI Agent",
+    title: "Vaanii — WhatsApp & Instagram AI Agent",
     description:
-      "Every customer replied to in 3 seconds. Even at 2 AM. Vaanii runs on your WhatsApp number and closes sales while your team sleeps.",
+      "Every customer replied to in 3 seconds. Even at 2 AM. Vaanii runs on your WhatsApp number and Instagram account and closes sales while your team sleeps.",
     url: "https://vaanii.in",
     siteName: "Vaanii",
     locale: "en_IN",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vaanii — WhatsApp AI Agent",
+    title: "Vaanii — WhatsApp & Instagram AI Agent",
     description:
-      "Every customer replied to in 3 seconds. Even at 2 AM. Vaanii runs on your WhatsApp number and closes sales while your team sleeps.",
+      "Every customer replied to in 3 seconds. Even at 2 AM. Vaanii runs on your WhatsApp number and Instagram account and closes sales while your team sleeps.",
   },
 };
 
