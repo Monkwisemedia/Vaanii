@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { SITE } from "@/lib/site";
 
 export type AuthState = { error: string } | undefined;
 
@@ -30,7 +31,10 @@ export async function signup(
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
-    options: { data: { business_name: business, channel, plan, interval } },
+    options: {
+      data: { business_name: business, channel, plan, interval },
+      emailRedirectTo: `${SITE.url}/login`,
+    },
   });
 
   if (error) {
