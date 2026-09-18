@@ -43,6 +43,7 @@
   --danger:        #dc2626;
 
   --wrap:          1140px;
+  --wrap-pad:      clamp(18px, 5vw, 40px);
   --rail:          clamp(14px, 4.5vw, 46px);
   --pad-beat:      clamp(38px, 9vw, 100px);
 
@@ -106,7 +107,7 @@ p { margin: 0; }
   width: 100%;
   max-width: var(--wrap);
   margin-inline: auto;
-  padding-inline: clamp(18px, 5vw, 40px);
+  padding-inline: var(--wrap-pad);
 }
 
 .mono {
@@ -213,11 +214,14 @@ p { margin: 0; }
 
 .beat {
   position: relative;
-  padding-left: var(--pad-beat);
+  padding-inline-start: var(--pad-beat);
   padding-block: clamp(46px, 7vw, 88px);
 }
 @media (max-width: 720px) {
-  .beat { padding-left: 0; }
+  /* Reset to .wrap's own inline padding, not 0 — this used to zero out
+     the left side entirely while the right side (from .wrap's
+     padding-inline) stayed put, breaking every section's alignment. */
+  .beat { padding-inline-start: var(--wrap-pad); }
 }
 
 .beat__time {
@@ -256,10 +260,10 @@ p { margin: 0; }
 .hero {
   padding-top: clamp(48px, 8vw, 90px);
   padding-bottom: clamp(40px, 7vw, 80px);
-  padding-left: var(--pad-beat);
+  padding-inline-start: var(--pad-beat);
 }
 @media (max-width: 720px) {
-  .hero { padding-left: 0; }
+  .hero { padding-inline-start: var(--wrap-pad); }
 }
 .hero__grid {
   display: grid;
@@ -1171,10 +1175,10 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
 .final {
   text-align: center;
   padding-block: clamp(70px, 12vw, 140px);
-  padding-left: var(--pad-beat);
+  padding-inline-start: var(--pad-beat);
 }
 @media (max-width: 720px) {
-  .final { padding-left: 0; }
+  .final { padding-inline-start: var(--wrap-pad); }
 }
 .final h2 { margin-bottom: 1rem; }
 .final .final__sub {
@@ -1376,6 +1380,16 @@ html.js-anim [data-reveal-group].in > * { opacity: 1; transform: none; }
     text-align: center;
     opacity: 1;
   }
+}
+@media (max-width: 430px) {
+  /* Log in + Choose plan together were wider than a phone screen,
+     forcing the whole page to scroll sideways. */
+  .nav__inner { gap: 0.6rem; }
+  .brand { font-size: 1.08rem; gap: 0.4rem; }
+  .brand__mark { width: 24px; height: 24px; }
+  .nav__cta { gap: 0.5rem; }
+  .nav__cta .btn { padding: 0.6em 0.85em; font-size: 0.84rem; }
+  .nav__cta .btn__arrow { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
